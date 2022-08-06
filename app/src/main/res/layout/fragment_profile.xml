@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.ProfileFragment">
+
+    <RelativeLayout
+            android:id="@+id/topSideOfPage"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@drawable/bg_blurry">
+        <LinearLayout
+                android:layout_marginTop="20dp" android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/profilePageLinear">
+            <ImageButton android:layout_width="50dp"
+                         android:layout_height="50dp"
+                         android:src="@drawable/ic_exit_24"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/authors_avatar"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:civ_border_color="#D3D0D0"
+                    app:civ_border_width="2dp"
+                    android:src="@drawable/author1"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="105dp"
+            />
+            <ImageButton android:layout_width="50dp"
+                         android:layout_height="50dp"
+                         android:layout_marginStart="90dp"
+                         android:src="@drawable/ic_edit_24"/>
+        </LinearLayout>
+        <TextView
+                android:id="@+id/authorsName"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@+id/profilePageLinear"
+                android:textSize="22sp"
+                android:text="Askhat Khassengali"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:gravity="center"
+        />
+        <TextView
+                android:id="@+id/likesCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/authorsName"
+                android:textSize="19sp"
+                android:text="100000"
+                android:textColor="@color/white"
+                android:gravity="center"
+        />
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/likesCount"
+                android:layout_marginTop="10dp">
+            <TextView
+                    android:padding="5dp"
+                    android:id="@+id/titlePuslishedPosts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:text="Опубликованные"
+                    android:textColor="@color/blue"
+                    android:gravity="center"
+                    android:background="@drawable/bg_textview"
+                    android:layout_marginStart="38dp"
+
+            />
+            <TextView
+                    android:id="@+id/notPublished"
+                    android:padding="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:text="Неопубликованные"
+                    android:textColor="@color/blue"
+                    android:background="@drawable/bg_textview"
+
+            />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewPosts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/topSideOfPage"
+            tools:itemCount="5"
+            tools:listitem="@layout/post_item"/>
+</RelativeLayout>

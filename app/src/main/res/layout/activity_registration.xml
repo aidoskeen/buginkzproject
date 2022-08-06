@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.RegistrationActivity">
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/signInAppBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:background="#FBFBFB">
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBarSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Регистрация"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:layout_centerHorizontal="true">
+
+            </TextView>
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <Button
+            android:text="Вход"
+            android:background="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/buttonSignIn"
+            android:layout_below="@+id/toolBarSignUp"/>
+    <Button
+            android:text="Регистрация"
+            android:background="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/buttonRegistration"
+            android:layout_below="@+id/toolBarSignUp"
+            android:layout_marginLeft="100dp"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_upload_button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_outline_cloud_upload_24"
+            android:layout_below="@+id/buttonSignIn"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="150dp"
+            app:civ_border_color="#D3D0D0"
+            app:civ_border_width="2dp"
+
+    />
+    <EditText
+            android:id="@+id/name"
+            android:layout_width="350dp"
+            android:layout_marginStart="28dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/img_upload_button"
+            android:hint="Имя"/>
+    <EditText
+            android:id="@+id/emailSignUp"
+            android:layout_width="350dp"
+            android:layout_marginStart="28dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_below="@+id/name"
+            android:hint="E-mail"/>
+    <EditText
+            android:id="@+id/phone"
+            android:layout_width="350dp"
+            android:layout_marginStart="28dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_below="@+id/emailSignUp"
+            android:hint="Телефон"/>
+    <EditText
+            android:id="@+id/passwordSignUp"
+            android:layout_width="350dp"
+            android:layout_marginStart="28dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_below="@+id/phone"
+            android:hint="Пароль"/>
+
+
+    <EditText
+            android:id="@+id/passwordConfirmation"
+            android:layout_width="350dp"
+            android:layout_marginStart="28dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_below="@+id/passwordSignUp"
+            android:hint="Подтвердите пароль"/>
+
+    <Button
+            android:text="Регистрация"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSignUp"
+            android:layout_marginTop="25dp"
+            android:layout_below="@+id/passwordConfirmation"
+            android:background="@drawable/bg_button"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_centerHorizontal="true"/>
+</RelativeLayout>

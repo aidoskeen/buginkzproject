@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.HomeFragment">
+
+            <com.smarteist.autoimageslider.SliderView
+                    android:id="@+id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    app:sliderAnimationDuration="600"
+                    app:sliderAutoCycleDirection="back_and_forth"
+                    app:sliderIndicatorAnimationDuration="600"
+                    app:sliderIndicatorEnabled="true"
+                    app:sliderIndicatorMargin="15dp"
+                    app:sliderIndicatorOrientation="horizontal"
+                    app:sliderIndicatorPadding="3dp"
+                    app:sliderIndicatorRadius="2dp"
+                    app:sliderIndicatorSelectedColor="#5A5A5A"
+                    app:sliderIndicatorUnselectedColor="#FFF"
+                    app:sliderScrollTimeInSec="1">
+
+                <com.google.android.material.appbar.AppBarLayout
+                        android:id="@+id/appBarTop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:background="@drawable/bg_toolbar"
+                >
+                    <androidx.appcompat.widget.Toolbar
+                            android:id="@+id/toolbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:background="@drawable/bg_toolbar"
+                    >
+
+                        <ImageView
+                                android:src="@drawable/ic_app_bugin"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp" android:id="@+id/logo"
+                                android:layout_gravity="center"
+                        />
+                        <ImageView
+                                android:src="@drawable/ic_rubrics"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp" android:id="@+id/categoriesImg"
+
+                        />
+                        <ImageView
+                                android:src="@drawable/ic_call_phone"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp" android:id="@+id/callImg"
+                                android:layout_gravity="end"
+
+                        />
+
+                    </androidx.appcompat.widget.Toolbar>
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            tools:itemCount="5"
+                            tools:listitem="@layout/author_item">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+
+                </com.google.android.material.appbar.AppBarLayout>
+            </com.smarteist.autoimageslider.SliderView>
+
+            <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolBarMiddle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="310dp"
+            >
+                <ImageView android:layout_width="30dp"
+                           android:layout_height="30dp"
+                           android:layout_gravity="end"
+                           android:src="@drawable/ic_settings_24"/>
+                <Button android:layout_width="85dp"
+                        android:layout_height="45dp"
+                        android:text="Все"
+                        android:textSize="10sp"/>
+                <Button android:layout_width="85dp"
+                        android:layout_height="45dp"
+                        android:text="Мой выбор"
+                        android:textSize="10sp"/>
+            </androidx.appcompat.widget.Toolbar>
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewPosts"
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp"
+                    android:layout_below="@id/toolBarMiddle"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/post_item"/>
+
+
+</RelativeLayout>
