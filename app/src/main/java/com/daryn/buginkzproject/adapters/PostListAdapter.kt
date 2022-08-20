@@ -7,9 +7,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.daryn.buginkzproject.R
+import com.daryn.buginkzproject.models.Datum
 import com.daryn.buginkzproject.models.PostViewModel
+import com.squareup.picasso.Picasso
 
-class PostListAdapter(private val mList: List<PostViewModel>) : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
+
+class PostListAdapter(private val mList: List<Datum>) : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
 
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,12 +29,15 @@ class PostListAdapter(private val mList: List<PostViewModel>) : RecyclerView.Ada
 
         val postViewModel = mList[position]
 
-        // sets the image to the imageview from our itemHolder class
-        holder.postImage.setImageResource(postViewModel.image)
+
+        Picasso.get()
+            .load(postViewModel.newsImage)
+            .into(holder.postImage)
 
         // sets the text to the textview from our itemHolder class
-        holder.postText.text = postViewModel.text
-
+        holder.postText.text = postViewModel.newsName
+        holder.buginCount.text = postViewModel.bugin
+        holder.viewCount.text = postViewModel.viewCount
     }
 
     // return the number of the items in the list
@@ -43,5 +49,8 @@ class PostListAdapter(private val mList: List<PostViewModel>) : RecyclerView.Ada
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val postImage: ImageView = itemView.findViewById(R.id.post_image)
         val postText: TextView = itemView.findViewById(R.id.caption)
+        val buginCount: TextView = itemView.findViewById(R.id.buginCount)
+        val viewCount: TextView = itemView.findViewById(R.id.viewsCount)
+
     }
 }

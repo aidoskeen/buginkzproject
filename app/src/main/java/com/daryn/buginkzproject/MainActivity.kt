@@ -12,14 +12,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.daryn.buginkzproject.adapters.SliderAdapter
 import com.daryn.buginkzproject.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.JsonSyntaxException
 import com.smarteist.autoimageslider.SliderView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -59,12 +53,10 @@ class MainActivity : AppCompatActivity() {
         imageUrl =
             (imageUrl + "https://www.thebalance.com/thmb/iwdt2GMw8iDsamjOQBQ7BPFxwZc=/1500x1000/filters:fill(auto,1)/what-is-gdp-definition-of-gross-domestic-product-3306038-final-bff6acefc7f04f17a7c266b06ead1659.png") as ArrayList<String>
 
-        // on below line we are initializing our
-        // slider adapter and adding our list to it.
+
         sliderAdapter = SliderAdapter( imageUrl)
 
-        // on below line we are setting auto cycle direction
-        // for our slider view from left to right.
+
         sliderView.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
 
         // on below line we are setting adapter for our slider.
@@ -98,13 +90,5 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         }
-    fun isJson(Json: String?): Boolean {
-        val gson = Gson()
-        return try {
-            gson.fromJson(Json, Any::class.java)
-            true
-        } catch (ex: JsonSyntaxException) {
-            false
-        }
-    }
+
     }

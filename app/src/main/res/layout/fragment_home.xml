@@ -95,13 +95,13 @@
                         android:text="Мой выбор"
                         android:textSize="10sp"/>
             </androidx.appcompat.widget.Toolbar>
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewPosts"
-                    android:layout_width="match_parent"
-                    android:layout_height="320dp"
-                    android:layout_below="@id/toolBarMiddle"
-                    tools:itemCount="5"
-                    tools:listitem="@layout/post_item"/>
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewPosts"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:layout_below="@id/toolBarMiddle"
+            tools:itemCount="5"
+            tools:listitem="@layout/post_item"/>
 
 
 </RelativeLayout>

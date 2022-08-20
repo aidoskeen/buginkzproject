@@ -1,7 +1,6 @@
 package com.daryn.buginkzproject.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,19 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.daryn.buginkzproject.NewsApi
 import com.daryn.buginkzproject.R
 import com.daryn.buginkzproject.RetrofitHelper
-
 import com.daryn.buginkzproject.adapters.AuthorListAdapter
 import com.daryn.buginkzproject.adapters.PostListAdapter
 import com.daryn.buginkzproject.databinding.FragmentHomeBinding
-import com.daryn.buginkzproject.models.AuthorViewModel
-import com.daryn.buginkzproject.models.Datum
-import com.daryn.buginkzproject.models.HomeViewModel
-import com.daryn.buginkzproject.models.PostViewModel
-import com.google.gson.GsonBuilder
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.daryn.buginkzproject.models.*
+import retrofit2.*
+
 
 class HomeFragment : Fragment() {
 
@@ -34,47 +26,40 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    var listofNews=ArrayList<Datum>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         homeViewModel =
-            ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(HomeViewModel::class.java)
+            ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[HomeViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val service = RetrofitHelper.getInstance().create(NewsApi::class.java)
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = service.getNews()
-            withContext(Dispatchers.Main) {
-                Log.d("JSONd --------------- :", response.body().toString())
-                val datafromApi=response.body()
-                if (datafromApi != null) {
-                    listofNews= datafromApi.data
-                }
+        getData()
+        setupRecyclerView()
 
-                if (response.isSuccessful) {
+        return root
+    }
 
-                    val gson = GsonBuilder().setPrettyPrinting().create()
-                    val dataJson = gson.toJson(
-                        response.body()
-                    )
-
-                        Log.d("JSON :", dataJson)
-
-                } else {
-
-                    Log.e("RETROFIT_ERROR", response.code().toString())
-
+    private fun getData() {
+        val retrofitBuilder = RetrofitHelper.getInstance().create(NewsApi::class.java)
+        val jsonResponse = retrofitBuilder.getNews()
+        jsonResponse.enqueue(object :Callback<NewsList>{
+            override fun onResponse(call: Call<NewsList>, response: Response<NewsList>) {
+                val newslist = response.body()
+                val dataList = newslist?.data?.let { ArrayList(it) }
+                if (dataList != null) {
+                    setupPostsRecyclerView(dataList)
                 }
             }
-        }
-        setupRecyclerView()
-        setupPostsRecyclerView()
-        return root
+
+            override fun onFailure(call: Call<NewsList>, t: Throwable) {
+                Toast.makeText(requireContext(),"FAILURE",Toast.LENGTH_SHORT).show()
+            }
+        })
     }
     private fun setupRecyclerView() {
         binding.recyclerview.apply {
@@ -82,16 +67,16 @@ class HomeFragment : Fragment() {
             adapter = AuthorListAdapter(createAuthorList()) { author, position ->
                 Toast.makeText(
                     requireActivity(),
-                    "Clisicked on actor: ${author.name}",
+                    "Clicked on actor: ${author.name}",
                     Toast.LENGTH_SHORT
                 ).show()
             }
         }
     }
-    private fun setupPostsRecyclerView() {
+    private fun setupPostsRecyclerView(listofNews:List<Datum>) {
         binding.recyclerViewPosts.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            adapter = PostListAdapter(createPostList(listofNews))
+            adapter = PostListAdapter(listofNews)
             }
         }
 
@@ -120,16 +105,13 @@ class HomeFragment : Fragment() {
 
         )
     }
-    private fun createPostList(news:ArrayList<Datum>): ArrayList<PostViewModel> {
-        val arrayList=ArrayList<PostViewModel>()
-        for(i in news.indices){
 
-            news[i].newsName?.let { PostViewModel(R.drawable.post1, it) }?.let { arrayList.add(it) }
-        }
-        return arrayList
-    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 }
+
+
+
+

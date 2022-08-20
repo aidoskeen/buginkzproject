@@ -12,4 +12,5 @@ data class Datum (
   @SerializedName("bugin"      ) var bugin     : String? = null,
   @SerializedName("author"     ) var author    : Author? = Author(),
   @SerializedName("rubric"     ) var rubric    : Rubric? = Rubric()
+
 )
